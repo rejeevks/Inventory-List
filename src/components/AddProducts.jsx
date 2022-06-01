@@ -10,7 +10,8 @@ const AddProducts = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     localStorage.setItem("data", JSON.stringify(inputFields));
-    console.log("InputFields", inputFields);
+    // console.log("InputFields", inputFields);
+    setInputFields([{ pcode: "", pname: "", pquantity: "" }]);
   };
 
   const handleChangeInput = (index, event) => {
@@ -29,7 +30,9 @@ const AddProducts = () => {
       <div className="mt-4">
         <Header />
       </div>
-
+      <div class="position-absolute pt-5 start-50 translate-middle">
+        <h4>Add to list</h4>
+      </div>
       <div class="container-xl mt-5">
         <div class="mb-3 row">
           <label for="inputPassword" class="col-sm-3 col-form-label">

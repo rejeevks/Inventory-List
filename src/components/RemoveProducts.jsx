@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
+import { Link } from "react-router-dom";
 
 const RemoveProducts = () => {
   const [count, setCount] = useState("");
@@ -10,7 +11,7 @@ const RemoveProducts = () => {
     const items = JSON.parse(localStorage.getItem("data"));
     setAllData(items);
   }, []);
-  console.log(allData);
+  // console.log(allData);
 
   const handleRemoveFields = (deleteCode) => {
     const newAllData = allData.filter((item) => item.pcode !== deleteCode);
@@ -56,6 +57,9 @@ const RemoveProducts = () => {
       <div className="mt-4">
         <Header />
       </div>
+      <div class="position-absolute pt-5 start-50 translate-middle">
+        <h4>Remove from list</h4>
+      </div>
 
       <div class="container-xl mt-5">
         <div class="mb-3 row">
@@ -73,13 +77,15 @@ const RemoveProducts = () => {
           <div class="mt-3">
             {count >= 1 ? (
               <div class="d-grid gap-2 col-6 mx-auto">
-                <button
-                  type="button"
-                  class="btn btn-danger "
-                  onClick={() => handleRemoveFields(deleteCode)}
-                >
-                  DELETE
-                </button>
+                <Link to="/listproducts">
+                  <button
+                    type="button"
+                    class="btn btn-danger "
+                    onClick={() => handleRemoveFields(deleteCode)}
+                  >
+                    DELETE
+                  </button>
+                </Link>
               </div>
             ) : null}
           </div>
