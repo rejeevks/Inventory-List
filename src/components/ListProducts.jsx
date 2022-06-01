@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 
 const ListProducts = () => {
-  let table = [];
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem("data"));
+    setData(items);
+  }, []);
+  console.log(data);
+
+  const dataLength = data ? data.length : null;
   return (
     <div>
       <div className="mt-4">
@@ -10,7 +18,7 @@ const ListProducts = () => {
       </div>
 
       <div class="container-xl mt-5">
-        {table.length > 0 ? (
+        {dataLength > 0 ? (
           <table class="table table-bordered mt-2">
             <thead>
               <tr>
@@ -20,8 +28,8 @@ const ListProducts = () => {
               </tr>
             </thead>
             <tbody>
-              {table &&
-                table.map((item) => (
+              {data &&
+                data.map((item) => (
                   <tr>
                     <td>{item.pcode}</td>
                     <td>{item.pname}</td>

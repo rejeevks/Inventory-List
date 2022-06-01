@@ -1,8 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 
 const RemoveProducts = () => {
   const [count, setCount] = useState("");
+  const [allData, setAllData] = useState([]);
+  const [deleteCode, setDeleteCode] = useState([]);
+
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem("data"));
+    setAllData(items);
+  }, []);
+  console.log(allData);
+
+  const handleRemoveFields = (deleteCode) => {
+    const newAllData = allData.filter((item) => item.pcode !== deleteCode);
+    localStorage.setItem("data", JSON.stringify(newAllData));
+  };
 
   const deleteProduct = () => {
     const product = [];
@@ -17,6 +30,9 @@ const RemoveProducts = () => {
               class="form-control"
               type="text"
               aria-label="default input example"
+              onChange={(e) => {
+                setDeleteCode(e.target.value);
+              }}
             />
           </div>
           <label for="pquantity" class="col-sm-3 col-form-label">
@@ -57,7 +73,11 @@ const RemoveProducts = () => {
           <div class="mt-3">
             {count >= 1 ? (
               <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="button" class="btn btn-danger ">
+                <button
+                  type="button"
+                  class="btn btn-danger "
+                  onClick={() => handleRemoveFields(deleteCode)}
+                >
                   DELETE
                 </button>
               </div>

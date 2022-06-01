@@ -9,6 +9,7 @@ const AddProducts = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    localStorage.setItem("data", JSON.stringify(inputFields));
     console.log("InputFields", inputFields);
   };
 
@@ -22,15 +23,6 @@ const AddProducts = () => {
   const handleAddFields = () => {
     setInputFields([...inputFields, { pcode: "", pname: "", pquantity: "" }]);
   };
-
-  // const handleRemoveFields = (id) => {
-  //   const values = [...inputFields];
-  //   values.splice(
-  //     values.findIndex((value) => value.id === id),
-  //     1
-  //   );
-  //   setInputFields(values);
-  // };
 
   return (
     <div>
